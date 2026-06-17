@@ -1,0 +1,157 @@
+/* =========================================================
+   listas.css — Descrições dos Drones | Drone Hub Brasil
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap');
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-base:       #0A0E1A;
+  --bg-surface:    #111827;
+  --bg-elevated:   #162032;
+  --accent-cyan:   #00B4D8;
+  --accent-blue:   #1E3A5F;
+  --text-primary:  #E2E8F0;
+  --text-secondary:#94A3B8;
+  --text-muted:    #475569;
+  --border:        #1E3A5F;
+  --border-bright: #00B4D8;
+  --font-display:  'Rajdhani', sans-serif;
+  --font-body:     'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  padding: 0 0 80px;
+
+  background-image:
+    linear-gradient(rgba(0, 180, 216, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 180, 216, 0.03) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* ---------- Category headings (h1) ---------- */
+h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-primary);
+  padding: 56px 40px 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 3px;
+  background: var(--accent-cyan);
+  margin-top: 12px;
+}
+
+/* ---------- Unordered list — drone grid ---------- */
+ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  padding: 32px 40px 0;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* ---------- Each list item = drone name label ---------- */
+li {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-cyan);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 14px;
+}
+
+/* ---------- Card wrapper: anchor + image + paragraph ----------
+   Each drone occupies a card. Since the HTML structure is
+   li → a → img → p (siblings inside ul), we use CSS grid
+   on the ul and treat every group as a visual card via the
+   anchor element that wraps the image.                        */
+
+ul a {
+  display: block;
+  overflow: hidden;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--bg-surface);
+  transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+  /* Signature: the card lifts like a drone taking off */
+}
+
+ul a:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 32px rgba(0, 180, 216, 0.18);
+}
+
+ul a img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  object-position: center;
+  padding: 20px;
+  background: var(--bg-elevated);
+  transition: transform 0.3s ease;
+}
+
+ul a:hover img {
+  transform: scale(1.04);
+}
+
+/* ---------- Description paragraph below each card ---------- */
+ul p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.75;
+  padding: 14px 0 0;
+}
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--accent-blue); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent-cyan); }
+
+/* ---------- Focus ---------- */
+:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  h1 { padding: 40px 20px 0; }
+  ul  { padding: 24px 20px 0; gap: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
